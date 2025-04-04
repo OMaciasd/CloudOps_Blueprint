@@ -1,0 +1,39 @@
+# values.yaml (Helm values base for the stack)
+namespace: prod
+
+mongo:
+  image: mongo:6
+  username: admin
+  password: password
+  database: myappdb
+  port: 27017
+
+backend:
+  image: tuusuario/nest-backend:latest
+  replicas: 2
+  port: 3000
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+    averageUtilization: 60
+
+ingress:
+  enabled: true
+  host: api.tudominio.com
+  path: /
+
+monitoring:
+  enabled: true
+  prometheus:
+    serviceMonitor: true
+  grafana:
+    dashboards:
+      enabled: true

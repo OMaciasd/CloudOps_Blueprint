@@ -1,0 +1,13 @@
+[Unit]
+Description=Node.js App
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /opt/nodeapp/main.js
+Restart=always
+User=ubuntu
+Environment=NODE_ENV=production
+WorkingDirectory=/opt/nodeapp/
+
+[Install]
+WantedBy=multi-user.target

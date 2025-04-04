@@ -1,0 +1,114 @@
+{
+ "dashboard": {
+  "id": null,
+  "title": "🌐 Cloud Monitoring Dashboard",
+  "tags": [
+   "cloud",
+   "costs",
+   "monitoring",
+   "aws",
+   "azure",
+   "gcp"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 37,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+   {
+    "type": "stat",
+    "title": "💰 AWS Monthly Cost",
+    "datasource": "CloudWatch",
+    "targets": [
+     {
+      "region": "us-east-1",
+      "namespace": "AWS/Billing",
+      "metricName": "EstimatedCharges",
+      "dimensions": {
+       "Currency": "USD"
+      },
+      "statistics": [
+       "Maximum"
+      ],
+      "period": 86400,
+      "refId": "A"
+     }
+    ],
+    "gridPos": {
+     "x": 0,
+     "y": 0,
+     "w": 6,
+     "h": 4
+    }
+   },
+   {
+    "type": "stat",
+    "title": "📈 CPU Usage (Azure)",
+    "datasource": "Azure Monitor",
+    "targets": [
+     {
+      "refId": "B",
+      "resourceGroup": "your-resource-group",
+      "resourceName": "your-vm-name",
+      "metricName": "Percentage CPU",
+      "aggregation": "Average"
+     }
+    ],
+    "gridPos": {
+     "x": 6,
+     "y": 0,
+     "w": 6,
+     "h": 4
+    }
+   },
+   {
+    "type": "stat",
+    "title": "🔥 GCP Latency (Cloud Run)",
+    "datasource": "GCP",
+    "targets": [
+     {
+      "refId": "C",
+      "metricType": "run.googleapis.com/request_latencies",
+      "project": "your-gcp-project"
+     }
+    ],
+    "gridPos": {
+     "x": 0,
+     "y": 4,
+     "w": 6,
+     "h": 4
+    }
+   },
+   {
+    "type": "gauge",
+    "title": "🔋 Resource Status",
+    "datasource": "Prometheus",
+    "targets": [
+     {
+      "expr": "up",
+      "refId": "D"
+     }
+    ],
+    "gridPos": {
+     "x": 6,
+     "y": 4,
+     "w": 6,
+     "h": 4
+    },
+    "options": {
+     "reduceOptions": {
+      "calcs": [
+       "lastNotNull"
+      ]
+     },
+     "fieldOptions": {
+      "defaults": {
+       "unit": "short"
+      }
+     }
+    }
+   }
+  ]
+ },
+ "overwrite": true
+}

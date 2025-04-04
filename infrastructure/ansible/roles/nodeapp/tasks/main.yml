@@ -1,0 +1,38 @@
+- name: Ensure Node.js is installed
+  apt:
+    name: nodejs
+    state: present
+    update_cache: yes
+
+- name: Ensure npm is installed
+  apt:
+    name: npm
+    state: present
+
+- name: Upload app archive
+  copy:
+    src: app.tar.gz
+    dest: /home/ubuntu/app.tar.gz
+
+- name: Extract app
+  unarchive:
+    src: /home/ubuntu/app.tar.gz
+    dest: /opt/nodeapp/
+    remote_src: yes
+
+- name: Install app dependencies
+  npm:
+    path: /opt/nodeapp/
+    production: yes
+
+- name: Copy systemd service file
+  template:
+    src: app.service.j2
+    dest: /etc/systemd/system/app.service
+
+- name: Enable and start the app
+  systemd:
+    name: app
+    enabled: yes
+    state: started
+    daemon_reload: yes

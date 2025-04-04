@@ -1,0 +1,57 @@
+# Node.js / NestJS / Express
+node_modules/
+dist/
+build/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env.*.local
+.env.local
+.env.test.local
+
+# VSCode
+.vscode/
+.history/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Docker
+docker-compose.override.yml
+*.pid
+*.seed
+*.seed.*
+
+# Git
+*.orig
+*.rej
+*.swp
+*.swo
+
+# Markdown temp/backup
+*~
+*.tmp
+*.bak
+
+# IDEs
+.idea/
+*.iml
+
+# Others
+.pnpm-debug.log
+.eslintcache
+.cache/
+*.tgz
